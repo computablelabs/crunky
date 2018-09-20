@@ -3,6 +3,9 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import logger from 'morgan'
 
+// Local Dependencies
+import { UserRouter } from './router'
+
 class App {
   public app: express.Application
 
@@ -10,6 +13,7 @@ class App {
     // @ts-ignore TS2349
     this.app = express()
     this.configureMiddleware()
+    this.configureRoutes()
   }
 
   private configureMiddleware(): void {
@@ -22,6 +26,10 @@ class App {
 
     //support application/x-www-form-urlencoded post data
     this.app.use(bodyParser.urlencoded({ extended: false }))
+  }
+
+  private configureRoutes(): void {
+    UserRouter(this.app)
   }
 }
 
