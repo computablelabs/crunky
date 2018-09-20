@@ -1,0 +1,32 @@
+{
+  "name": "crunky",
+  "description": "Computable Labs backend service",
+  "version": "0.0.1",
+  "license": "MIT",
+  "author": "Geoff Kinder <geoff@computable.io>",
+  "main": "./src/server.js",
+  "scripts": {
+    "build": "tsc -p ./tsconfig.json",
+    "build:clean": "rm -rf ./dist",
+    "build:dry": "tsc -noEmit -p ./tsconfig.json",
+    "dev": "PORT=3001 nodemon --exec ts-node ./src/server.ts",
+    "prod": "npm run build && npm run start",
+    "start": "nodemon ./dist/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@types/dotenv": "^4.0.3",
+    "@types/express": "^4.16.0",
+    "@types/morgan": "^1.7.35",
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "express-ts": "0.0.1-dev.5",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.18.4",
+    "typescript": "^3.0.3"
+  },
+  "devDependencies": {
+    "ts-node": "^7.0.1"
+  }
+}
