@@ -1,16 +1,14 @@
 // Dependencies
 import Sequelize from 'sequelize'
 
-const isProd: boolean = process.env.NODE_ENV === 'production'
-const databaseName: string = isProd ? 'computable' : 'computable_dev'
-const username: string = process.env.DB_USERNAME as string
-const password: string = process.env.DB_PASSWORD as string
-const host: string = process.env.DB_HOST as string
+// Local Dependencies
+import * as config from './config'
+
+const env = process.env.NODE_ENV || 'development'
 
 // @ts-ignore TS2351
-const sequelize = new Sequelize(databaseName, username, password, {
-  host,
-  dialect: 'postgres',
+const sequelize = new Sequelize({
+  ...config[env],
   operatorsAliases: false,
 
   pool: {
