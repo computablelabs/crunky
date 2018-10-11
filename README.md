@@ -51,6 +51,10 @@ Copy `.env.example` to `.env`
 
 Update `DB_USERNAME` and `DB_PASSWORD` env vars with the values for your postgres user
 
+### Run Database Migrations
+
+`npm run sequelize -- db:migrate`
+
 ### Node
 
 We use NVM to track an application's recommended node version.

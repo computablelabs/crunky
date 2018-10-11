@@ -9,29 +9,61 @@
     "build": "tsc -p ./tsconfig.json",
     "build:clean": "rm -rf ./dist",
     "build:dry": "tsc -noEmit -p ./tsconfig.json",
+    "db:migrate": "ts-node ./scripts/migrate",
     "dev": "PORT=3001 nodemon --exec ts-node ./src/server.ts",
     "prod": "npm run build && npm run start",
+    "sequelize": "sequelize",
     "start": "nodemon ./dist/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "pretest": "NODE_ENV=test npm run db:migrate",
+    "test": "NODE_ENV=test jest",
+    "test:watch": "NODE_ENV=test jest --watch"
   },
   "dependencies": {
     "@types/dotenv": "^4.0.3",
     "@types/express": "^4.16.0",
     "@types/morgan": "^1.7.35",
     "@types/sequelize": "^4.27.25",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
+    "celebrate": "^8.0.2",
+    "cors": "^2.8.4",
     "dotenv": "^6.0.0",
+    "ethereumjs-util": "^5.2.0",
     "express": "^4.16.3",
     "express-ts": "0.0.1-dev.5",
+    "jsonwebtoken": "^8.3.0",
     "morgan": "^1.9.1",
     "nodemon": "^1.18.4",
     "pg": "^7.4.3",
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.38.1",
-    "typescript": "^3.0.3"
+    "typescript": "^3.0.3",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
+    "@types/jest": "^23.3.4",
+    "child-process-promise": "^2.2.1",
+    "jest": "^23.6.0",
     "sequelize-cli": "^4.1.1",
+    "supertest": "^3.3.0",
+    "ts-jest": "^23.10.4",
     "ts-node": "^7.0.1"
+  },
+  "jest": {
+    "automock": false,
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "roots": [
+      "./src"
+    ],
+    "testPathIgnorePatterns": [
+      "node_modules"
+    ],
+    "testRegex": "^.+\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    }
   }
 }

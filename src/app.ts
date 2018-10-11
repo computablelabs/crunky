@@ -1,10 +1,12 @@
 // Dependencies
 import express from 'express'
 import bodyParser from 'body-parser'
+import cors from 'cors'
 import logger from 'morgan'
 
 // Local Dependencies
-import { UserRouter } from './router'
+import { paramValidationErrors, unhandledErrors, errors } from './middleware'
+import * as Routers from './router'
 
 class App {
   public app: express.Application
@@ -26,10 +28,20 @@ class App {
 
     //support application/x-www-form-urlencoded post data
     this.app.use(bodyParser.urlencoded({ extended: false }))
+
+    // enable CORS headers
+    this.app.use(cors())
   }
 
   private configureRoutes(): void {
-    UserRouter(this.app)
+    Object.values(Routers).forEach((router) => {
+      router(this.app)
+    })
+
+    // error handling middleware | must come after routes
+    this.app.use(paramValidationErrors)
+    this.app.use(unhandledErrors)
+    this.app.use(errors)
   }
 }
 
