@@ -60,7 +60,7 @@ describe('auth routes', () => {
           this.request
             .post(`/auth/${challenge}/${signature}`)
             .set('Accept', 'application/json')
-            // .expect(201)
+            .expect(201)
             .then(async (res) => {
               const { token } = res.body.data
               const decodedToken = await verifyJwtToken(token)

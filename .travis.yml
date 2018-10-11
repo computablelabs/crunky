@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+  - "8.11.4"
+before_install: dpkg --compare-versions `npm -v` ge 5.10.0 || npm i -g npm@^5.10.0
+services:
+  - postgresql
+env:
+  - SECRET_KEY=secretkey
+install:
+  - npm install
+before_script:
+  - psql -c 'create database computable_test;' -U postgres
+  - export DB_USERNAME=postgres
+script:
+  - npm test
+

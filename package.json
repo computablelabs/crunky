@@ -58,6 +58,7 @@
     "roots": [
       "./src"
     ],
+    "setupTestFrameworkScriptFile": "<rootDir>/specs/helpers/config.ts",
     "testPathIgnorePatterns": [
       "node_modules"
     ],
